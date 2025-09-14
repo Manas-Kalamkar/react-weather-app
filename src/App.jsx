@@ -70,7 +70,7 @@ function App() {
     
     if (data.length === 0) {
   setIsLoading(false);
-  setErrorMessage('City not found , please try again.');
+  setErrorMessage('City not found.');
   return;
 }
     return({
