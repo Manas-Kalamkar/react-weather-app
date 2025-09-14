@@ -14,8 +14,6 @@ import Rain from "./component/Rain";
 import Wind from "./component/Wind";
 import './App.css'
 
-import Lottie from 'lottie-react';
-import loadingAnimation from './assets/animations/loading.json'
 const API_KEY= import.meta.env.VITE_CITY_API_KEY;
 
 function App() {
@@ -37,9 +35,7 @@ function App() {
   const [isLoading,setIsLoading] = useState(false);
   const cardsRef = useRef(null);
 
-  if(errorMessage){
-    setIsLoading(false);
-  }
+
 
   const main = async (city)=>{
     setErrorMessage('');
@@ -72,9 +68,11 @@ function App() {
     const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
     const data = await response.json();
     
-    if(data.Response==="False"){
-        setErrorMessage(data.Error || 'Failed to fetch Coordinates');
-    }
+    if (data.length === 0) {
+  setIsLoading(false);
+  setErrorMessage('City not found , please try again.');
+  return;
+}
     return({
       lat:data[0].lat,
       lon:data[0].lon,
@@ -130,20 +128,7 @@ function App() {
 
   const router=createBrowserRouter([
     {path:"/",element:<>
-    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-    {isLoading ? <div className="flex items-center justify-center bg-white z-50 mt-10   "><Lottie 
-      renderer="svg"
-      animationData={loadingAnimation}
-      background="transparent"
-      speed="0.5"
-      autoPlay=""
-      loop=""
-      className="w-[100px] h-[100px] md:w-fit fixed " /></div>:""
-      }
-
-      {
-        errorMessage?<div className="flex items-center justify-center bg-white z-50 mt-10 text-red-500">{errorMessage}</div>:""
-      }
+    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} isLoading={isLoading} errorMessage={errorMessage} setIsLoading={setIsLoading} setErrorMessage ={setErrorMessage} />
     <Home />
     <Cards weatherData={weatherData} learnMoreOption={learnMoreOption} ref={cardsRef} />
     <About />

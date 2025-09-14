@@ -9,15 +9,20 @@ import hamburger from '../assets/hamburger.svg'
 import search from '../assets/search.svg'
 import close from '../assets/close.svg'
 
-const Header = ({ searchTerm,setSearchTerm }) => {
+
+import Lottie from 'lottie-react';
+import loadingAnimation from '../assets/animations/loading.json'
+
+const Header = ({ searchTerm,setSearchTerm, isLoading, errorMessage }) => {
     const [isSearch, setIsSearch] = useState(false);
     const [isOptions, setIsOptions] = useState(false);
 
     const typeRef = useRef(null);
+    
 
     return (
 
-        <header className="bg-white block">
+        <header className="bg-white block relative">
             <nav className="relative flex items-center p-1 justify-between mx-3 mt-4  h-16 md:py-14 xl:gap-10 xl:py-14 xl:px-10">
                 <NavLink to='/' className="hover:cursor-pointer">
                     <div className="flex items-center gap-4 xl:gap-8">
@@ -27,6 +32,22 @@ const Header = ({ searchTerm,setSearchTerm }) => {
                         </h1>
                     </div>
                 </NavLink>
+                <div className="m-0" >
+
+                {isLoading && <div className="flex items-center justify-center bg-white z-50 mt-10 absolute top-0 bottom-0"><Lottie 
+                    renderer="svg"
+                    animationData={loadingAnimation}
+                    background="transparent"
+                    speed="0.5"
+                    autoPlay=""
+                    loop=""
+                    className="w-[100px] h-[100px] md:w-fit" /></div>
+                }
+
+                {
+                    errorMessage && <div className="flex items-center justify-center bg-white z-50 mt-10 text-red-500">{errorMessage}</div>
+                }
+                </div>
 
                 <div className="flex items-center gap-4 xl:gap-8">
                     {isSearch ? (
