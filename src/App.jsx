@@ -143,7 +143,7 @@ function App() {
     {path:"/about",element:<><Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} /><About /></>},
     {path:"/contact",element:<><Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} /><Contact /></>},
   ],{
-    basename: "/project_5_weather_react_app",
+    basename: "/react-weather-app",
   })
 
   return (

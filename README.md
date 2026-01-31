@@ -2,7 +2,7 @@
 
 A sleek and responsive weather application built with **React**, fetching real-time weather and air quality data based on user input. Designed for performance and a great user experience with intuitive animations and dynamic visuals.
 
-## Live Demo: https://manas-kalamkar.github.io/project_5_weather_react_app/
+## Live Demo: https://manas-kalamkar.github.io/react-weather-app/
 
 ## 📷 Screenshots
 <img width="1920" height="1080" alt="weather_react_app_1" src="https://github.com/user-attachments/assets/072ac0c8-dfe8-43d8-acfc-18e8d6a35ae2" />
